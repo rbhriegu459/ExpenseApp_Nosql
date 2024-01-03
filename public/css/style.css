@@ -60,6 +60,15 @@ form input, form select{
     padding: 3px;
     margin-left: 10px;
 }
+#leaderBoardBtn{
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #8EE4AF;
+    border-radius: 10px;
+    padding: 3px;
+    margin: 10px;
+}
 button{
     cursor: pointer;
     font-size: 14px;
@@ -91,6 +100,16 @@ button:hover{
     border-radius: 10px;
     box-shadow: 10px 10px 8px #b6d970;
 
+}
+
+#leaderboard{
+    font-size: 17px;
+    margin: 30px;
+    background-color: #05386B;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 8px #b6d970;
 }
 .listItems{
     margin: 20px;

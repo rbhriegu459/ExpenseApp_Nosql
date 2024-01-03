@@ -8,9 +8,10 @@
 </head>
 <body>
     <nav class="navBar">
-        <a href="/">Logout</a>
-        <h5 id="premiumuser"></h5>
+        <!-- <a href="/">Logout</a> -->
+        <h4 id="premiumuser"></h4>
         <button class="rzp-button" id="premiumbutton">Buy Premium</button>
+        <div id="message"></div>
     </nav>
     <div class="main">
         <div class="container">
@@ -37,8 +38,7 @@
             <h2>List of Expenses</h2>
             <ol id="listOfExpenses"></ol>
         </div>
-        <div id="message"></div>
-        <ul id="leaderboard"></ul>
+        <ul id="leaderboard" style="visibility: hidden;"></ul>
     
     </div>
 
@@ -182,8 +182,9 @@
             inputElement.value= "Show LeaderBoard";
             inputElement.id = "leaderBoardBtn"
             inputElement.onclick = async() =>{
-
+                
                 const token = localStorage.getItem('token');
+                document.getElementById('leaderboard').style.visibility = "visible";
                 document.getElementById("leaderBoardBtn").style.visibility = "hidden";
                 
                 const userLeaderBoardArray = await axios.get("http://localhost:3000/premium/showLeaderboard", {headers: {"Authorization": token} });
@@ -191,7 +192,7 @@
                 var leaderboardElem = document.getElementById('leaderboard');
                 leaderboardElem.innerHTML += '<h1>Leader Board </h1>'
                 userLeaderBoardArray.data.forEach((userDetails) => {
-                    leaderboardElem.innerHTML += `<li>Name - ${userDetails.name} Total Expense - ${userDetails.total_expenses}`;
+                    leaderboardElem.innerHTML += `<li>Name - ${userDetails.name}, Total Expense - ${userDetails.total_expenses}`;
                 })
             }
             document.getElementById("message").appendChild(inputElement);

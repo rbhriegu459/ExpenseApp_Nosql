@@ -39,9 +39,12 @@ const deleteExpense = async (req,res) =>{
     const id = req.params.id;
     const t = await sequelize.transaction();
     try{
-        const amount = await Expense.findOne('expenseamount', {where: {id:id}});
+        const expense = await Expense.findOne({where: {id:id}});
+        // console.log(expense.userId);
         await Expense.destroy({where: {id:id}});
-        await User.update({total_expenses : total_expenses-amount}, {where:{id:req.user.id}, transaction:t});
+        const te = await User.findOne({where : {id:expense.userId}});
+        const updateAmount = te.total_expenses - expense.expenseamount;
+        await User.update({total_expenses : updateAmount}, {where:{id:expense.userId}, transaction:t});
         await t.commit();
         return res.status(201).json("Deleted");
     } catch(err){
