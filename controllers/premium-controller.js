@@ -7,16 +7,7 @@ const showLeaderboard = async (req,res) =>{
 
         // GROUPING THE TABLE AND JOINING THE TABLE TO GET SPECIFIC DATAS
         const userAggregatedExpenses = await User.findAll({
-            attributes: ['id', 'name', [sequelize.fn('sum', sequelize.col('expenses.expenseamount')), 'total_cost']],
-            include: [
-                {
-                    model: Expense,
-                    attributes: []
-                }
-            ],
-            group: ['users.id'],
-            order:[['total_cost', "DESC"]]
-            
+            order:[['total_expenses', "DESC"]]
         });
         
         // ---Brute Force--
