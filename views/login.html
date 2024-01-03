@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+</head>
+<body>
+    <form onsubmit="login(event)">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+
+        <button type="submit">Login</button>
+
+        <br>
+
+        <h3>New User? <a href="/user/signup">SignUp</a></h3>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+
+    <script>
+        async function login(e){
+            e.preventDefault();
+            try{
+                const loginDetails = {
+                    email:e.target.email.value,
+                    password:e.target.password.value
+                }
+
+                const response = await axios.post("http://localhost:3000/user/login", loginDetails)
+                    
+                alert(response.data.message);
+                localStorage.setItem('token', response.data.token);
+                window.location.href ="../expense/getExpense";
+            }
+            catch(err){
+                console.log(JSON.stringify(err));
+                document.body.innerHTML += `<div style="color:red;">Login Failed ${err.message}</div>`
+            }
+        }
+    </script>
+</body>
+</html>
