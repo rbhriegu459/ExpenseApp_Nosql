@@ -92,6 +92,14 @@
 
                 if(response.status === 201){
                     addNewExpenseToUi(response.data.expenses);
+                    // const userLeaderBoardArray = await axios.get("http://localhost:3000/premium/showLeaderboard", {headers: {"Authorization": token} });
+
+                    // var leaderboardElem = document.getElementById('leaderboard');
+                    // leaderboardElem.innerHTML += '<h1>Leader Board </h1>'
+                    // userLeaderBoardArray.data.forEach((userDetails) => {
+                    //     // leaderboardElem.innerHTML = '';
+                    //     leaderboardElem.innerHTML += `<li>Name - ${userDetails.name}, Total Expense - ${userDetails.total_expenses} </li>`;
+                    // });
                 } else{
                     throw new Error("Failed to create new Expense");
                 }   
@@ -148,7 +156,7 @@
             const token = localStorage.getItem('token');
             const response = await axios.get("http://localhost:3000/purchase/permiummembership", {headers: {"Authorization":token}});
             var options = {
-                "key": 'rzp_test_cdBK53MEGt8dAR',
+                "key": 'rzp_test_ZomU12iYFtqFZq',
                 "order_id": response.data.order.id,
                 "handler": async function (response){
 

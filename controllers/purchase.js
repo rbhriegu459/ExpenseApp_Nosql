@@ -5,8 +5,8 @@ const userController = require('./user-controller');
 const purchasePremium = (req,res) => {
     try{
         var rzp = new Razorpay({
-            key_id: 'rzp_test_cdBK53MEGt8dAR',
-            key_secret: 'XkXlOsayexPo5TnDjOknVlcl'
+            key_id: 'rzp_test_ZomU12iYFtqFZq',
+            key_secret: 'EBqjbrSoTxZllPTCAkZm60gB'
         })
 
         var options = {
