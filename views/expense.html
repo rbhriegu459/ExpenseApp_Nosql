@@ -44,7 +44,12 @@
 
     <div class="expenses" id="expenses" style="visibility: hidden;">
         <h2>Daily Expenses:</h2>
-        <table></table>
+        <table id="table" class="table">                      
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Action</th>       
+      </table>
 
         <h2>Weekly Expenses:</h2>
         <table></table>
@@ -67,6 +72,7 @@
         function showPremium(){
             document.getElementById('premiumbutton').style.visibility = "hidden";
             document.getElementById('premiumuser').innerHTML = "You are premium user now!";
+            document.getElementById('expenses').style.visibility = "visible";
         }
 
         window.addEventListener('DOMContentLoaded',()=>{

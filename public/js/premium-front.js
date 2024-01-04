@@ -1,7 +1,7 @@
 // async function rzpAction(e){
+    const token = localStorage.getItem('token');
     document.getElementById('premiumbutton').onclick = async function(e) {
         e.preventDefault();
-        const token = localStorage.getItem('token');
         const response = await axios.get("http://localhost:3000/purchase/permiummembership", {headers: {"Authorization":token}});
         var options = {
             "key": 'rzp_test_ZomU12iYFtqFZq',
@@ -43,10 +43,7 @@
         inputElement2.value= "Download";
         inputElement2.id = "downloadBtn";
 
-        inputElement2.onclick = async() =>{
-            document.getElementById('expenses').style.visibility = "visible";
-            document.getElementById('downloadBtn').style.visibility="hidden";
-        }
+        inputElement2.onclick = download();
         
         inputElement.onclick = async() =>{
             
@@ -64,4 +61,17 @@
         }
         document.getElementById("message").appendChild(inputElement);
         document.getElementById("message").appendChild(inputElement2);
+    }
+
+    async function download(){
+        try{
+            const response = await axios.get('http://localhost:3000/user/download', { headers: {"Authorization" : token} })
+            var a = document.createElement("a");
+            a.href = response.data.fileUrl;
+            a.download = 'myexpense.csv';
+            a.click();
+        } 
+        catch(err) {
+            throw new Error(err);
+        };
     }
