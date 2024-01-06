@@ -13,7 +13,7 @@ body{
     display: flex;
     flex-direction: row-reverse;
 }
-.navBar a{
+/* .navBar a{
     margin-right: 30px;
     text-decoration: none;
     color: white;
@@ -21,7 +21,7 @@ body{
 }
 .navBar a:hover{
     color: #05386B;
-}
+} */
 .main{
     display: flex;
     flex-direction: row;
@@ -51,16 +51,8 @@ form input, form select{
     box-shadow: 10px 10px 8px #b6d970;
     height: 30%;
 }
-.delBtn{
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: #8EE4AF;
-    border-radius: 10px;
-    padding: 3px;
-    margin-left: 10px;
-}
-#leaderBoardBtn, #downloadBtn{
+
+button{
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
@@ -70,24 +62,6 @@ form input, form select{
     margin: 10px;
 }
 
-button{
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: #8EE4AF;
-    border-radius: 10px;
-    padding: 3px;
-    margin: 10px;
-}
-.submitBtn{
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: #8EE4AF;
-    border-radius: 10px;
-    padding: 6px;
-    margin-top: 12px;
-}
 button:hover{
     background-color: #379683;
 }
@@ -96,11 +70,20 @@ button:hover{
     font-size: 17px;
     margin: 30px;
     background-color: #05386B;
-    padding: 20px;
+    padding: 17px;
     color: white;
     border-radius: 10px;
     box-shadow: 10px 10px 8px #b6d970;
+}
 
+.delBtn{
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #8EE4AF;
+    border-radius: 10px;
+    padding: 6px;
+    margin-left: 10px;
 }
 
 #leaderboard{
@@ -112,6 +95,7 @@ button:hover{
     border-radius: 10px;
     box-shadow: 10px 10px 8px #b6d970;
 }
-.listItems{
-    margin: 20px;
+
+#leaderboard li{
+    margin: 10px;
 }

@@ -46,18 +46,14 @@
 
 
     function leaderBoardShow(){
-        const inputElement = document.createElement("input");
-        inputElement.type = "button";
-        inputElement.value= "Show LeaderBoard";
-        inputElement.id = "leaderBoardBtn"
+        // const inputElement = document.createElement("input");
+        // inputElement.type = "button";
+        // inputElement.value= "Show LeaderBoard";
+        // inputElement.id = "leaderBoardBtn"
 
-        // const inputElement2 = document.createElement("input");
-        // inputElement2.type = "button";
-        // inputElement2.value= "Download";
-        // inputElement2.id = "downloadBtn";
-
+        const inputElement = document.getElementById('leaderBoardBtn');
         document.getElementById("downloadExpense").style.visibility = "visible";
-
+        inputElement.style.visibility = "visible";
         
         inputElement.onclick = async() =>{
             
@@ -73,7 +69,6 @@
                 leaderboardElem.innerHTML += `<li>Name - ${userDetails.name}, Total Expense - ${userDetails.total_expenses}`;
             })
         }
-        document.getElementById("message").appendChild(inputElement);
     }
 
     async function download(){

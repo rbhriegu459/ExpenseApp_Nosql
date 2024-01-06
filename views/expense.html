@@ -11,7 +11,7 @@
         <!-- <a href="/">Logout</a> -->
         <button class="rzp-button" id="premiumbutton">Buy Premium</button>
         <button onclick="download()" id="downloadExpense" style="visibility: hidden;">Download File</button>
-        <div id="message"></div>
+        <button id="leaderBoardBtn" style="visibility: hidden;">LeaderBoard</button>
         <h4 id="premiumuser"></h4>
     </nav>
     <div class="main">
@@ -27,7 +27,7 @@
                 <select name="category" id="category">
                     <option value="fuel">Fuel</option>
                     <option value="shopping">Shopping</option>
-                    <option value="stydyMaterial">Study material</option>
+                    <option value="studyMaterial">Study material</option>
                     <option value="food">Food</option>
                     <option value="electricity">Electricity</option>
                 </select>
@@ -36,10 +36,10 @@
         </div>
 
         <div class="listOfExpense">
-            <h2>List of Expenses</h2>
+            <h1>List of Expenses</h1>
             <ol id="listOfExpenses"></ol>
         </div>
-        <ul id="leaderboard" style="visibility: hidden;"></ul>
+        <ol id="leaderboard" style="visibility: hidden;"></ol>
     
     </div>
 
@@ -138,7 +138,7 @@
                 <li id=${expenseElemId} class="listItems">
                     ${expenses.expenseamount} - ${expenses.category} - ${expenses.description}
                     <button onclick='deleteExpense(event, ${expenses.id})' class="delBtn">
-                        Delete Expense
+                        Delete
                     </button>
                 </li>
             `
