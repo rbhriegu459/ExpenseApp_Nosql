@@ -9,9 +9,10 @@
 <body>
     <nav class="navBar">
         <!-- <a href="/">Logout</a> -->
-        <h4 id="premiumuser"></h4>
         <button class="rzp-button" id="premiumbutton">Buy Premium</button>
+        <button onclick="download()" id="downloadExpense" style="visibility: hidden;">Download File</button>
         <div id="message"></div>
+        <h4 id="premiumuser"></h4>
     </nav>
     <div class="main">
         <div class="container">
@@ -51,11 +52,17 @@
             <th>Action</th>       
       </table>
 
-        <h2>Weekly Expenses:</h2>
+        <!-- <h2>Weekly Expenses:</h2>
         <table></table>
 
         <h2>Monthly Expenses:</h2>
-        <table></table>
+        <table></table> -->
+
+        <!-- <h2>Downloaded File URLs :</h2>
+        <table id="downloadedFiles" class="table">
+            <th>File URLs</th>
+            <th>Date</th>
+        </table> -->
     </div>
 
     <!-- Axios Library -->
@@ -69,12 +76,7 @@
 
     <script>
 
-        function showPremium(){
-            document.getElementById('premiumbutton').style.visibility = "hidden";
-            document.getElementById('premiumuser').innerHTML = "You are premium user now!";
-            document.getElementById('expenses').style.visibility = "visible";
-        }
-
+        
         window.addEventListener('DOMContentLoaded',()=>{
             const token = localStorage.getItem('token');
             const decodedToken = parseJwt(token);

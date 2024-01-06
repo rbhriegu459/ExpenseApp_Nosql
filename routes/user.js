@@ -9,6 +9,8 @@ router.post('/forgotpassword', forgotController.postForgotPassword);
 router.get('/createNewPassword/:id', forgotController.createNewPassword);
 router.post('/createNewPassword/:id', forgotController.updatePassword);
 
+
+
 router.get('/signup', userController.getSignUp);
 router.post('/signup', userController.postSignUp);
 

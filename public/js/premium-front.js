@@ -32,18 +32,32 @@
         })
     }
 
+    async function showPremium(){
+        document.getElementById('premiumbutton').style.visibility = "hidden";
+        document.getElementById('premiumuser').innerHTML = "You are premium user now!";
+        document.getElementById('expenses').style.visibility = "visible";
+
+        // const x= document.getElementById('downloadedFiles');
+        // const responseArray = await axios.get('http://localhost:3000/expense/download', { headers: {"Authorization" : token} })
+        // responseArray.data.forEach((fileDetails) => {
+        //     x.innerHTML += `<li>Name - ${fileDetails.fileUrl}, Total Expense - ${fileDetails.date}`;
+        // })
+    }
+
+
     function leaderBoardShow(){
         const inputElement = document.createElement("input");
         inputElement.type = "button";
         inputElement.value= "Show LeaderBoard";
         inputElement.id = "leaderBoardBtn"
 
-        const inputElement2 = document.createElement("input");
-        inputElement2.type = "button";
-        inputElement2.value= "Download";
-        inputElement2.id = "downloadBtn";
+        // const inputElement2 = document.createElement("input");
+        // inputElement2.type = "button";
+        // inputElement2.value= "Download";
+        // inputElement2.id = "downloadBtn";
 
-        inputElement2.onclick = download();
+        document.getElementById("downloadExpense").style.visibility = "visible";
+
         
         inputElement.onclick = async() =>{
             
@@ -60,18 +74,18 @@
             })
         }
         document.getElementById("message").appendChild(inputElement);
-        document.getElementById("message").appendChild(inputElement2);
     }
 
     async function download(){
         try{
-            const response = await axios.get('http://localhost:3000/user/download', { headers: {"Authorization" : token} })
+            const response = await axios.get('http://localhost:3000/expense/download', { headers: {"Authorization" : token} })
             var a = document.createElement("a");
             a.href = response.data.fileUrl;
             a.download = 'myexpense.csv';
             a.click();
+            console.log(response);
         } 
         catch(err) {
             throw new Error(err);
-        };
+        };   
     }
