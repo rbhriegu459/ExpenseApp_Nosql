@@ -26,7 +26,7 @@ const addExpense = async (req,res) =>{
     const t = await sequelize.transaction();
     const {expenseamount, description, category} = req.body;
     const userId = req.user.id;
-    console.log(req);
+    // console.log(req);
     try{
         const expenses = await Expense.create({expenseamount, description, category, userId}, {transaction: t});
         const total_expenses = Number(req.user.total_expenses) + Number(expenseamount);
@@ -61,9 +61,9 @@ const deleteExpense = async (req,res) =>{
 // ---UPLOADING FILE TO AWS S3------
 
 function uploadToS3(data, filename){
-    const BUCKET_NAME = 'expensetracking459' ;
-    const IAM_USER_KEY = 'AKIATYN4LYAAKZOGUJGS' ;
-    const IAM_USER_SECRET = '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';
+    const BUCKET_NAME = process.env.BUCKET_NAME ;
+    const IAM_USER_KEY =  process.env.IAM_USER_KEY;
+    const IAM_USER_SECRET =  process.env.IAM_USER_SECRET;
 
     const s3bucket = new AWS.S3({
         accessKeyId: IAM_USER_KEY,

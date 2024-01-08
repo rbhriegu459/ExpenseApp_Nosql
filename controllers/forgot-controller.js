@@ -14,7 +14,7 @@ const forgotPassword = (req,res) => {
 
 const postForgotPassword = async (req, res) =>{
     try{
-            const brevoAPIKey = process.env.BREVO_API_KEY;
+            const brevoAPIKey = process.env.BREVO_KEY;
             
             const user = await User.findOne({where:{email:req.body.email}});
             if(!user) return res.status(400).json({status:"Fail", message:"Email not found"});

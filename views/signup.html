@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
+
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <form onsubmit="signup(event)">
+    <nav class="navBar">
+        <button><a href="/user/login">Login</a></button>
+    </nav>
+    <h1>SIGNUP</h1>
+    <form onsubmit="signup(event)" class="container">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" required>
 
@@ -20,10 +26,7 @@
         
     </form>
 
-    <h3>Already a User? <a href="/user/login">Login</a></h3>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
-
+    
     <script>
         async function signup(e){
             try{
@@ -49,6 +52,7 @@
                 document.body.innerHTML += `<div style="color:red;">${err}</div>`
             }
         }
-    </script>
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 </body>
 </html>

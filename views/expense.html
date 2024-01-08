@@ -16,7 +16,7 @@
     </nav>
     <div class="main">
         <div class="container">
-            <form onsubmit="addNewExpense(event)">
+            <form onsubmit="addNewExpense(event)" id="ExpenseForm">
                 <label for="expenseamount">Expense Amount:</label>
                 <input type="number" id="expenseamount" required>
         
@@ -65,11 +65,7 @@
         </table> -->
     </div>
 
-    <!-- Axios Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
-
-    <!-- Razorpay Library -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+   
 
     <!-- Premium feature frontend  -->
     <script src="/js/premium-front.js"></script>
@@ -114,6 +110,7 @@
 
                 if(response.status === 201){
                     addNewExpenseToUi(response.data.expenses);
+                    document.getElementById("ExpenseForm").reset();
                     // const userLeaderBoardArray = await axios.get("http://localhost:3000/premium/showLeaderboard", {headers: {"Authorization": token} });
 
                     // var leaderboardElem = document.getElementById('leaderboard');
@@ -170,9 +167,13 @@
 
             return JSON.parse(jsonPayload);
         }
-
-
         
     </script>
+
+     <!-- Axios Library -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+
+     <!-- Razorpay Library -->
+     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </body>
 </html>

@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
+
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <form onsubmit="login(event)">
+    <nav class="navBar">
+        <button><a href="/user/signup">SignUp</a></button>
+    </nav>
+    <h1>LOGIN</h1>
+    <form onsubmit="login(event)" class="container">
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" required>
 
@@ -16,12 +22,10 @@
         <button type="submit">Login</button>
 
         <br>
-        <h3>Forgot Password? <a href="/user/forgotpassword">Click Here to change password</a></h3>
-        <h3>New User? <a href="/user/signup">SignUp</a></h3>
+        <h4>Forgot Password?<br> <a class="link-cntrl" href="/user/forgotpassword">Reset password</a></h4>
     </form>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
-
+    
     <script>
         async function login(e){
             e.preventDefault();
@@ -30,6 +34,8 @@
                     email:e.target.email.value,
                     password:e.target.password.value
                 }
+
+                console.log(loginDetails);
 
                 const response = await axios.post("http://localhost:3000/user/login", loginDetails)
                     
@@ -43,5 +49,7 @@
             }
         }
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
 </body>
 </html>

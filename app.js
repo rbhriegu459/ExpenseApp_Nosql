@@ -3,6 +3,9 @@ const express = require('express');
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
+require('dotenv').config();
+
+const Port = process.env.PORT;
 
 // Models import
 const Expense = require("./models/expense-model");
@@ -36,8 +39,8 @@ Order.belongsTo(User);
 
 sequelize.sync()
 .then(result=>{
-    app.listen(3000, ()=>{
-      console.log("Server running on port 3000");
+    app.listen(Port, ()=>{
+      console.log(`Server running on port ${Port}`);
     })
 }) 
 .catch((err)=>{

@@ -4,7 +4,7 @@
         e.preventDefault();
         const response = await axios.get("http://localhost:3000/purchase/permiummembership", {headers: {"Authorization":token}});
         var options = {
-            "key": 'rzp_test_ZomU12iYFtqFZq',
+            "key": "rzp_test_WnMUhYeHXqQQ10",
             "order_id": response.data.order.id,
             "handler": async function (response){
 

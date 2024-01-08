@@ -2,11 +2,13 @@ const Razorpay= require('razorpay');
 const Order = require('../models/order-model');
 const userController = require('./user-controller');
 
+require('dotenv').config();
+
 const purchasePremium = (req,res) => {
     try{
         var rzp = new Razorpay({
-            key_id: 'rzp_test_ZomU12iYFtqFZq',
-            key_secret: 'EBqjbrSoTxZllPTCAkZm60gB'
+            key_id: process.env.RZP_API_KEY ,
+            key_secret: process.env.RZP_SECRET_KEY
         })
 
         var options = {
@@ -16,7 +18,6 @@ const purchasePremium = (req,res) => {
           };
 
         rzp.orders.create(options, async function(err, order) {
-            console.log(order.id);
             if(err){
                 console.log(err);
             } 
