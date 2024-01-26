@@ -1,5 +1,5 @@
-const expenseController = require('../controllers/expense-controller');
-const authenticate = require('../middleware/auth');
+const expenseController = require('../controllers/expense');
+const authenticate = require('../middlewares/auth');
 const express = require('express');
 
 const router = express.Router();

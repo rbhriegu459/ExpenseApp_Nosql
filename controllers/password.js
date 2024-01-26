@@ -1,8 +1,7 @@
 const path = require("path");
-// const Brevo = require('@getbrevo/brevo');
 const Brevo = require('sib-api-v3-sdk');
 const {v4:uuidv4} = require('uuid');       
-const User = require('../models/user-model');
+const User = require('../models/user');
 const Resetpassword = require('../models/password');
 const bcrypt = require('bcrypt');
 
@@ -16,7 +15,7 @@ const postForgotPassword = async (req, res) =>{
     try{
             const brevoAPIKey = process.env.BREVO_KEY;
             
-            const user = await User.findOne({where:{email:req.body.email}});
+            const user = await User.findOne({email:req.body.email});
             if(!user) return res.status(400).json({status:"Fail", message:"Email not found"});
             
             const id = uuidv4();
@@ -27,7 +26,6 @@ const postForgotPassword = async (req, res) =>{
             
             var apiKey = defaultClient.authentications['api-key']; //isapi-key an argument?
             
-            // console.log(brevoAPIKey);
             apiKey.apiKey = brevoAPIKey;
             
             const transEmailApi = new Brevo.TransactionalEmailsApi();
@@ -41,7 +39,6 @@ const postForgotPassword = async (req, res) =>{
             
             const path = `http://localhost:3000/user/createNewPassword/${id}`;
 
-            // console.log(path);
 
             await transEmailApi.sendTransacEmail({
                 sender,
@@ -61,7 +58,7 @@ const postForgotPassword = async (req, res) =>{
 
 const createNewPassword = async(req,res) => {
     try{
-        const createPassUUID = await Resetpassword.findOne({where:{id:req.params.id}});
+        const createPassUUID = await Resetpassword.findOne({id:req.params.id});
         if(!createPassUUID) {
             return res.status(400).json({status:"failed", message:"Invalid Link"});
         }
@@ -82,8 +79,8 @@ const updatePassword = async (req,res) =>{
     const resetDb= await Resetpassword.findOne({where : {id: req.params.id}});
     if(resetDb.active){
         const userId = resetDb.userId;
-        await User.update({password:hashedPassword} , {where:{id: userId}});
-        await Resetpassword.update({active: false}, {where:{id: req.params.id}});
+        await User.updateOne({password:hashedPassword} , {id: userId});
+        await Resetpassword.updateOne({active: false},{id: req.params.id});
         res.status(201).json("Password Updated successfully");
     } else{
         res.status(400).json({message:"Link Expired"});    

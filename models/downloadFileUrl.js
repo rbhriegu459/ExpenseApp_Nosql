@@ -1,18 +1,13 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../util/database');
+const mongoose= require('mongoose');
 
-const FileUrl =sequelize.define('downloadFileUrl', {
-    fileURL : {
-        type: Sequelize.STRING
-    },
-    userId: {
-        type: Sequelize.INTEGER
-    },
-    date:{
-        type: Sequelize.DATE
-    }
+const fileUrlSchema = new mongoose.Schema({
+    fileURL : String,
+    userId: String,
+    date: Date
     }, 
     { timestamps: false} //disables createdat and updatedat
 )
+
+const FileUrl = mongoose.model('FileUrl', fileUrlSchema);
 
 module.exports = FileUrl;

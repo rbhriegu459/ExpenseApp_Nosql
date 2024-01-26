@@ -1,16 +1,17 @@
-const sequelize = require("./util/database");
+const {connectToMongoDB} = require('./utils/database');
 const express = require('express');
 const path = require("path");
+const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const app = express();
 require('dotenv').config();
 
-const Port = process.env.PORT;
+const Port = process.env.PORT || 3000;
 
 // Models import
-const Expense = require("./models/expense-model");
-const User = require("./models/user-model");
-const Order = require('./models/order-model');
+// const Expense = require("./models/expense");
+// const User = require("./models/user");
+// const Order = require('./models/order');
 
 // Routes import
 const expenseRoute = require('./routes/expense');
@@ -31,18 +32,26 @@ app.use('/expense', expenseRoute);
 app.use('/purchase', purchaseRoute);
 app.use('/premium', premiumRoute);
 
-User.hasMany(Expense);
-Expense.belongsTo(User);
+// User.hasMany(Expense);
+// Expense.belongsTo(User);
 
-User.hasMany(Order);
-Order.belongsTo(User);
+// User.hasMany(Order);
+// Order.belongsTo(User);
 
-sequelize.sync()
-.then(result=>{
+// sequelize.sync()
+// .then(result=>{
+//     app.listen(Port, ()=>{
+//       console.log(`Server running on port ${Port}`);
+//     })
+// }) 
+// .catch((err)=>{
+//     console.log("Database Error setting Sequelize",err);
+// });
+
+connectToMongoDB()
+.then(() =>{
     app.listen(Port, ()=>{
-      console.log(`Server running on port ${Port}`);
+        console.log(`Server running on port ${Port}`);
     })
-}) 
-.catch((err)=>{
-    console.log("Database Error setting Sequelize",err);
-});
+})
+.catch((err) => console.log("Mongoose Error : ", err));

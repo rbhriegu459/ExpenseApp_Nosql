@@ -1,6 +1,5 @@
 const Razorpay= require('razorpay');
-const Order = require('../models/order-model');
-const userController = require('./user-controller');
+const Order = require('../models/order');
 
 require('dotenv').config();
 
@@ -21,7 +20,9 @@ const purchasePremium = (req,res) => {
             if(err){
                 console.log(err);
             } 
-            await req.user.createOrder({orderid:order.id, status:"PENDING"})
+            const createdOrder =new Order({orderid:order.id, status:'PENDING'})
+            createdOrder.save();
+            await req.user.save();
             return res.status(201).json({order, key_id:rzp.key_id});
           })
     } catch(err){
@@ -31,26 +32,23 @@ const purchasePremium = (req,res) => {
 }
 
 const updateTransactionStatus = async (req,res) => {
+    const { orderid, payment_id} = req.body;
     try{
-        // console.log(req)
-        const {payment_id, orderid} = req.body;
-        const order = await Order.findOne({where: {orderid:orderid}})
-        const promise1 = order.update({payment_id:payment_id, status:"SUCCESSFUl"});
-        const promise2 =  req.user.update({ispremiumuser:true});
-
-        console.log(req.user.id);
-        Promise.all([promise1, promise2]).then(() => {
-            return res.status(202).json({success:true, message:"Transaction Successful" ,token: userController.generateAccessToken(req.user.id, undefined, true)})
-        })
-        .catch(err => {
-            throw new Error(err);
-        });
-    }
-    catch(err){
+        const order = await Order.findOne({orderid})
+        if(order){
+            order.paymentid = payment_id;
+            order.status = 'successful';
+            await order.save();
+            req.user.ispremiumuser = true;
+            await req.user.save();
+            return res.status(202).json({success: true, message: 'Transaction successful'});
+        }else{
+            throw new Error("Failed updating transaction");
+        }
+    }catch(err){
         console.log(err);
-        res.status(403).json({error:err, message:"Something went wrong"});
-    }
-                
+        res.status(403).json({error: err, message:'Something went wrong in updating transaction'})
+    }               
 }
 
 module.exports = {purchasePremium, updateTransactionStatus};

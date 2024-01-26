@@ -1,14 +1,13 @@
 const express = require("express");
-const userController= require('../controllers/user-controller');
-const authentication  =require('../middleware/auth');
+const userController= require('../controllers/user');
+const authentication  =require('../middlewares/auth');
 const router = express.Router();
-const forgotController = require('../controllers/forgot-controller');
+const forgotController = require('../controllers/password');
 
 router.get('/forgotpassword', forgotController.forgotPassword);
 router.post('/forgotpassword', forgotController.postForgotPassword);
 router.get('/createNewPassword/:id', forgotController.createNewPassword);
 router.post('/createNewPassword/:id', forgotController.updatePassword);
-
 
 
 router.get('/signup', userController.getSignUp);
